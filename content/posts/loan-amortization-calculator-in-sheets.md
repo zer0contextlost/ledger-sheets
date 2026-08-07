@@ -6,10 +6,10 @@ tags: ["loans", "google-sheets", "templates"]
 ---
 
 An amortization schedule shows, for every payment period, how much of a
-fixed payment goes to interest versus principal, and what the remaining
-balance is. Sheets has three built-in functions that do the math directly
-— this covers how they fit together, not whether a particular loan or rate
-is a good deal, which depends on numbers specific to an actual offer.
+fixed payment goes to interest versus principal, and what the balance is
+afterward. Sheets has three built-in functions for this. Whether a
+particular rate or term is a good deal depends on numbers specific to an
+actual offer, which this post doesn't touch.
 
 ## The three functions
 
@@ -20,20 +20,20 @@ months (`term`):
 =PMT(rate/12, term, -principal)
 ```
 
-`PMT` returns the fixed monthly payment. `rate/12` converts an annual rate
-to a monthly one; `principal` is negated because Sheets treats it as an
-outflow from the lender's perspective by convention — leaving it positive
-would return a negative payment.
+`PMT` returns the fixed monthly payment. `rate/12` converts the annual rate
+to a monthly one. `principal` is negated because Sheets treats it as an
+outflow from the lender's side by convention; leave it positive and the
+payment comes back negative.
 
 ```
 =IPMT(rate/12, period, term, -principal)
 =PPMT(rate/12, period, term, -principal)
 ```
 
-`IPMT` and `PPMT` split that same fixed payment into interest and principal
-for a specific `period` (e.g., month 7 of 360). `IPMT + PPMT` for any given
-period always equals the `PMT` result — that's a useful sanity check when
-setting up the sheet.
+`IPMT` and `PPMT` split that same payment into interest and principal for
+a specific `period`, say month 7 of 360. Add them together for any given
+period and you get the `PMT` result back. That's a useful check once the
+sheet is built.
 
 ## Building the schedule
 
@@ -48,45 +48,39 @@ Principal: =PPMT($B$1/12, A2, $B$2, -$B$3)
 Balance:   =$B$3 - SUM($D$2:D2)
 ```
 
-Here `$B$1` is annual rate, `$B$2` is term in months, `$B$3` is principal,
-and `A2` is the period number. The `$` locks give an absolute reference for
-the loan constants and a relative one for the period, so dragging the
-formula down 359 more rows recalculates each period correctly without
-retyping anything.
+`$B$1` is annual rate, `$B$2` is term in months, `$B$3` is principal, `A2`
+is the period number. The dollar signs lock the loan constants while
+leaving the period reference relative, so dragging the formula down 359
+more rows recalculates each period without retyping anything.
 
-`Balance` sums *all* principal paid so far and subtracts from the original
-loan — not just "previous balance minus this period's principal" — because
-that formulation is self-correcting if you ever insert or reorder rows,
-where a chained previous-row reference would break.
+`Balance` sums all principal paid so far and subtracts it from the
+original loan, rather than chaining off the previous row's balance. That
+matters if you ever insert or reorder rows: a chained reference breaks,
+this doesn't.
 
-## Verifying it's built correctly
+## Verifying it
 
-The last row's `Balance` should equal exactly 0 (allowing for floating-point
-rounding in the 12th decimal place, which is normal). If it doesn't, the
-usual culprits are: `rate` and `term` not both being monthly (mixing an
-annual rate with a monthly term or vice versa), or `principal` not
-negated consistently across all three functions.
+The last row's Balance should land on exactly 0, give or take
+floating-point rounding in the twelfth decimal place. If it doesn't, check
+that rate and term are both monthly or both annual, not mixed, and that
+principal is negated consistently across all three functions.
 
 ## Extra payments
 
-To model an extra principal payment in a given month, add an
-`ExtraPayment` column and change `Balance` to:
+Add an `ExtraPayment` column and change Balance to:
 
 ```
 =$B$3 - SUM($D$2:D2) - SUM($F$2:F2)
 ```
 
-where `F` is the extra-payment column. This shortens the effective payoff
-period but doesn't recompute the fixed `Payment` amount — modeling a
-recast (where the payment itself drops after a lump-sum payment) requires
-re-running `PMT` with the new remaining balance and remaining term as
-inputs to a second schedule starting from that point, rather than a single
-continuous formula.
+where `F` is the extra-payment column. This shortens the payoff period but
+doesn't recompute the fixed payment amount. Modeling a recast, where the
+payment itself drops after a lump sum, means running `PMT` again with the
+new remaining balance and remaining term as inputs to a second schedule
+starting from that point.
 
-## A recap you can build once and reuse
+## Reusing it
 
-Once the five-column structure and the four core formulas are in place,
-this schedule is a template — plug in a different rate, term, or principal
-in the three top-of-sheet input cells and the entire schedule below
-recalculates. That reusability is the actual point of building it as
-formulas rather than a one-off calculation.
+Once the five columns and four formulas are in place, this is a template.
+Change the rate, term, or principal in the three input cells and the whole
+schedule below recalculates.

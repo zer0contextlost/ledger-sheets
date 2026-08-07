@@ -4,17 +4,15 @@ date: 2026-08-07
 description: "What Ledger Sheets is and what it isn't."
 ---
 
-Ledger Sheets is a small collection of spreadsheet templates and formula
-breakdowns for everyday money math: budgets, freelance invoicing and
-expense tracking, loan amortization, and simple break-even/ROI
-calculators — built for Google Sheets and Excel.
+Ledger Sheets covers spreadsheet templates and formulas: budgets, freelance
+invoicing and expense tracking, loan amortization, break-even and ROI
+calculators. Google Sheets and Excel.
 
-**This site covers spreadsheet mechanics, not financial advice.** Posts
-explain how a formula or template works, not what you personally should do
-with your money. Figures like tax brackets, contribution limits, or
-interest rates change over time and by jurisdiction — always verify current
-numbers against an official source before relying on them; treat any such
-figures here as illustrative, not current fact.
+Posts here explain how a formula or template works. They don't tell you
+what to do with your money. Tax brackets, contribution limits, and interest
+rates change by year and by jurisdiction, so treat any such figures on this
+site as illustrative examples, not current fact. Check an official source
+before relying on a number for anything real.
 
-Some links on this site may be affiliate links — if you buy through them we
-may earn a small commission at no extra cost to you.
+Some links may be affiliate links. If you buy through one, we may earn a
+small commission at no extra cost to you.
