@@ -1,0 +1,13 @@
+baseURL = "https://zer0contextlost.github.io/ledger-sheets/"
+languageCode = "en-us"
+title = "Ledger Sheets"
+
+[params]
+  description = "Spreadsheet templates and formula breakdowns for budgets, invoices, and loan math — the mechanics, not financial advice."
+  tagline = "Formulas and templates, not advice."
+
+[taxonomies]
+  tag = "tags"
+
+[markup.goldmark.renderer]
+  unsafe = true
