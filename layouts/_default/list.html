@@ -1,11 +1,20 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-<section class="post-list">
+<h1 class="page-title">{{ .Title }}</h1>
+<section class="sheet">
+  <div class="sheet-head">
+    <span>Sheet</span>
+    <span>Updated</span>
+  </div>
   {{ range .Pages.ByDate.Reverse }}
   <article class="post-summary">
-    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    <p class="meta">{{ .Date.Format "January 2, 2006" }}</p>
-    <p>{{ .Description }}</p>
+    <a class="row-link" href="{{ .RelPermalink }}" aria-label="{{ .Title }}"></a>
+    <div class="cell-main">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <p class="excerpt">{{ .Description }}</p>
+    </div>
+    <div class="cell-meta">
+      <span class="date">{{ .Date.Format "Jan 2, 2006" }}</span>
+    </div>
   </article>
   {{ end }}
 </section>
