@@ -1,0 +1,30 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>A 50/30/20 Budget Tracker in Google Sheets, Formula by Formula · Ledger Sheets</title><meta name=description content="How to build a self-updating 50/30/20 budget tracker in Google Sheets: category tagging, SUMIF rollups, and a progress bar that doesn't need manual updates."><link rel=stylesheet href=/ledger-sheets/css/style.css><link rel=alternate type=application/rss+xml href=/ledger-sheets/index.xml title="Ledger Sheets"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3797749320386385" crossorigin=anonymous></script></head><body><header class=site-header><div class=wrap><div class=brand-group><a class=brand href=/><span class=brand-mark>fx</span>Ledger Sheets</a>
+<span class=tagline>Formulas and templates, not advice.</span></div><nav class=nav><a href=/about/>About</a></nav></div></header><main class=wrap><article class=post><h1>A 50/30/20 Budget Tracker in Google Sheets, Formula by Formula</h1><p class=meta><span class=date>August 7, 2026</span>
+<span class=tag>budgeting</span><span class=tag>google-sheets</span><span class=tag>templates</span></p><div class=content><p>The 50/30/20 rule splits take-home income into needs, wants, and
+savings/debt, roughly in a 50%, 30%, 20% ratio. Whether that split fits
+your situation is a separate question. What it gives a spreadsheet is three
+categories to tag transactions against and measure against a target, and
+that&rsquo;s what this post builds.</p><h2 id=sheet-layout>Sheet layout</h2><p>Two tabs: <code>Transactions</code> for raw entries, <code>Summary</code> for the rollup. Add a
+transaction and nothing else needs to change, because the formulas live on
+a different tab.</p><p><code>Transactions</code> columns:</p><table><thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Category</th></tr></thead><tbody><tr><td>2026-08-01</td><td>Rent</td><td>1400</td><td>Needs</td></tr><tr><td>2026-08-02</td><td>Streaming</td><td>15</td><td>Wants</td></tr><tr><td>2026-08-03</td><td>401k transfer</td><td>300</td><td>Savings</td></tr></tbody></table><p>Restrict Category to a dropdown with <strong>Data → Data validation → Dropdown</strong>
+(<code>Needs</code>, <code>Wants</code>, <code>Savings</code>). The rollup formulas below match against
+these strings exactly, so a typo in a manually-typed category breaks the
+totals silently.</p><h2 id=the-rollup-formulas>The rollup formulas</h2><p>On <code>Summary</code>, with income in <code>B1</code>:</p><pre tabindex=0><code>=SUMIF(Transactions!D:D, &#34;Needs&#34;, Transactions!C:C)
+=SUMIF(Transactions!D:D, &#34;Wants&#34;, Transactions!C:C)
+=SUMIF(Transactions!D:D, &#34;Savings&#34;, Transactions!C:C)
+</code></pre><p>Each scans the full column regardless of row count, so new transactions
+don&rsquo;t require touching the formula.</p><p>As a percentage of income:</p><pre tabindex=0><code>=SUMIF(Transactions!D:D, &#34;Needs&#34;, Transactions!C:C) / B1
+</code></pre><p>Format the cell as a percentage rather than multiplying by 100 by hand.
+That keeps the underlying value a true fraction, which matters if you
+chart it later.</p><h2 id=a-progress-bar-without-a-chart>A progress bar without a chart</h2><p><code>SPARKLINE</code> renders a small horizontal bar inline in a cell:</p><pre tabindex=0><code>=SPARKLINE(B2/B1, {&#34;charttype&#34;,&#34;bar&#34;;&#34;max&#34;,0.5})
+</code></pre><p><code>B2</code> is the Needs total, <code>0.5</code> is 50% as a fraction. The bar fills relative
+to that max, so it visually clips right at the target ratio instead of
+scaling to whatever the current value happens to be.</p><h2 id=flagging-over-target-categories>Flagging over-target categories</h2><p>Conditional formatting, custom formula:</p><pre tabindex=0><code>=B2/$B$1 &gt; 0.5
+</code></pre><p>Set the highlight color and this flags the Needs percentage the moment it
+crosses 50%. No manual checking required.</p><h2 id=categories-that-dont-fit-cleanly>Categories that don&rsquo;t fit cleanly</h2><p>Real spending rarely sorts into three clean buckets. A phone bill is partly
+a need and partly discretionary. The formulas above don&rsquo;t care about that
+ambiguity; they only need every row to have some value in Category. Pick a
+tie-breaking rule once, apply it consistently, and remember the SUMIF
+totals are only as meaningful as the categorization behind them.</p><p>The same pattern, raw log plus dropdown-constrained categories plus SUMIF
+rollups, works past three categories too. A six-category zero-based budget
+uses the same structure with more rows on the Summary tab.</p></div></article></main><footer class=site-footer><div class=wrap><p>&copy; 2026 Ledger Sheets. Some links on this site may be affiliate links — if you buy through them we may earn a small commission at no extra cost to you.</p><p class=fine-print>Templates and formula breakdowns, not financial advice.</p></div></footer></body></html>

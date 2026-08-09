@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Google-Sheets on Ledger Sheets</title><link>https://zer0contextlost.github.io/ledger-sheets/tags/google-sheets/</link><description>Recent content in Google-Sheets on Ledger Sheets</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://zer0contextlost.github.io/ledger-sheets/tags/google-sheets/index.xml" rel="self" type="application/rss+xml"/><item><title>A 50/30/20 Budget Tracker in Google Sheets, Formula by Formula</title><link>https://zer0contextlost.github.io/ledger-sheets/posts/50-30-20-budget-tracker-formulas/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://zer0contextlost.github.io/ledger-sheets/posts/50-30-20-budget-tracker-formulas/</guid><description>&lt;p&gt;The 50/30/20 rule splits take-home income into needs, wants, and
+savings/debt, roughly in a 50%, 30%, 20% ratio. Whether that split fits
+your situation is a separate question. What it gives a spreadsheet is three
+categories to tag transactions against and measure against a target, and
+that&amp;rsquo;s what this post builds.&lt;/p&gt;
+&lt;h2 id="sheet-layout"&gt;Sheet layout&lt;/h2&gt;
+&lt;p&gt;Two tabs: &lt;code&gt;Transactions&lt;/code&gt; for raw entries, &lt;code&gt;Summary&lt;/code&gt; for the rollup. Add a
+transaction and nothing else needs to change, because the formulas live on
+a different tab.&lt;/p&gt;</description></item><item><title>A Simple ROI Calculator in Google Sheets: NPV, IRR, and Payback Period</title><link>https://zer0contextlost.github.io/ledger-sheets/posts/a-simple-roi-calculator-in-google-sheets-npv-irr-and-payback/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://zer0contextlost.github.io/ledger-sheets/posts/a-simple-roi-calculator-in-google-sheets-npv-irr-and-payback/</guid><description>&lt;p&gt;Most &amp;ldquo;ROI calculator&amp;rdquo; templates floating around are a single cell dividing gain by cost. That works for a one-time, single-period return, but it falls apart the moment you have cash flows spread across multiple months or years, because it ignores when the money actually shows up. This post builds a small calculator that handles multi-period cash flows properly using NPV, IRR, and a payback period formula, and explains what each one is actually computing.&lt;/p&gt;</description></item><item><title>Building a Break-Even Calculator in Google Sheets: Contribution Margin and a What-If Table</title><link>https://zer0contextlost.github.io/ledger-sheets/posts/building-a-break-even-calculator-in-google-sheets-contributi/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://zer0contextlost.github.io/ledger-sheets/posts/building-a-break-even-calculator-in-google-sheets-contributi/</guid><description>&lt;p&gt;Break-even analysis answers one question: how many units before revenue
+covers fixed costs. Building it in a spreadsheet instead of running the
+math once means you can change any input, price, cost per unit, fixed
+overhead, and see the break-even point move immediately. Nothing here is
+pricing or business strategy advice. Just the calculator and how to read
+it.&lt;/p&gt;
+&lt;h2 id="setting-up-the-inputs"&gt;Setting up the inputs&lt;/h2&gt;
+&lt;p&gt;Four inputs, each in its own cell so every formula below references them
+instead of hardcoding numbers:&lt;/p&gt;</description></item><item><title>Building a Loan Amortization Schedule in Google Sheets</title><link>https://zer0contextlost.github.io/ledger-sheets/posts/loan-amortization-calculator-in-sheets/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://zer0contextlost.github.io/ledger-sheets/posts/loan-amortization-calculator-in-sheets/</guid><description>&lt;p&gt;An amortization schedule shows, for every payment period, how much of a
+fixed payment goes to interest versus principal, and what the balance is
+afterward. Sheets has three built-in functions for this. Whether a
+particular rate or term is a good deal depends on numbers specific to an
+actual offer, which this post doesn&amp;rsquo;t touch.&lt;/p&gt;
+&lt;h2 id="the-three-functions"&gt;The three functions&lt;/h2&gt;
+&lt;p&gt;Given a loan amount (&lt;code&gt;principal&lt;/code&gt;), an annual rate (&lt;code&gt;rate&lt;/code&gt;), and a term in
+months (&lt;code&gt;term&lt;/code&gt;):&lt;/p&gt;</description></item><item><title>Freelance Invoice and Expense Tracker: A Two-Tab Spreadsheet That Scales</title><link>https://zer0contextlost.github.io/ledger-sheets/posts/freelance-invoice-expense-tracker-template/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://zer0contextlost.github.io/ledger-sheets/posts/freelance-invoice-expense-tracker-template/</guid><description>&lt;p&gt;Freelancers need two things a generic budget spreadsheet doesn&amp;rsquo;t give
+them: a record of what&amp;rsquo;s been invoiced versus what&amp;rsquo;s actually been paid,
+and expenses sorted in a way that&amp;rsquo;s easy to hand off at tax time. What
+counts as deductible where you live is a question for a tax professional,
+not a spreadsheet post. This covers the tabs and the formulas.&lt;/p&gt;
+&lt;h2 id="tab-1-invoice-log"&gt;Tab 1: Invoice log&lt;/h2&gt;
+&lt;p&gt;Columns: &lt;code&gt;Invoice #&lt;/code&gt;, &lt;code&gt;Client&lt;/code&gt;, &lt;code&gt;Date Sent&lt;/code&gt;, &lt;code&gt;Due Date&lt;/code&gt;, &lt;code&gt;Amount&lt;/code&gt;, &lt;code&gt;Status&lt;/code&gt;
+(dropdown: &lt;code&gt;Sent&lt;/code&gt;, &lt;code&gt;Paid&lt;/code&gt;, &lt;code&gt;Overdue&lt;/code&gt;).&lt;/p&gt;</description></item></channel></rss>

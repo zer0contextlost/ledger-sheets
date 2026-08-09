@@ -1,0 +1,27 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Freelance Invoice and Expense Tracker: A Two-Tab Spreadsheet That Scales · Ledger Sheets</title><meta name=description content="A Google Sheets template for freelancers: an invoice log with automatic overdue flags, and an expense tab that rolls up by category and quarter for tax prep."><link rel=stylesheet href=/ledger-sheets/css/style.css><link rel=alternate type=application/rss+xml href=/ledger-sheets/index.xml title="Ledger Sheets"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3797749320386385" crossorigin=anonymous></script></head><body><header class=site-header><div class=wrap><div class=brand-group><a class=brand href=/><span class=brand-mark>fx</span>Ledger Sheets</a>
+<span class=tagline>Formulas and templates, not advice.</span></div><nav class=nav><a href=/about/>About</a></nav></div></header><main class=wrap><article class=post><h1>Freelance Invoice and Expense Tracker: A Two-Tab Spreadsheet That Scales</h1><p class=meta><span class=date>August 7, 2026</span>
+<span class=tag>freelancing</span><span class=tag>invoicing</span><span class=tag>google-sheets</span><span class=tag>templates</span></p><div class=content><p>Freelancers need two things a generic budget spreadsheet doesn&rsquo;t give
+them: a record of what&rsquo;s been invoiced versus what&rsquo;s actually been paid,
+and expenses sorted in a way that&rsquo;s easy to hand off at tax time. What
+counts as deductible where you live is a question for a tax professional,
+not a spreadsheet post. This covers the tabs and the formulas.</p><h2 id=tab-1-invoice-log>Tab 1: Invoice log</h2><p>Columns: <code>Invoice #</code>, <code>Client</code>, <code>Date Sent</code>, <code>Due Date</code>, <code>Amount</code>, <code>Status</code>
+(dropdown: <code>Sent</code>, <code>Paid</code>, <code>Overdue</code>).</p><p>Compute Status instead of updating it by hand:</p><pre tabindex=0><code>=IF(Status=&#34;Paid&#34;, &#34;Paid&#34;, IF(TODAY() &gt; DueDate, &#34;Overdue&#34;, &#34;Sent&#34;))
+</code></pre><p>Status only ever gets manually set to <code>Paid</code>, and only when payment
+actually arrives. Everything else derives from the due date, so nothing
+goes stale because you forgot to update a cell.</p><p>Total outstanding:</p><pre tabindex=0><code>=SUMIF(Status_range, &#34;&lt;&gt;Paid&#34;, Amount_range)
+</code></pre><p>Total overdue, which is the number worth watching:</p><pre tabindex=0><code>=SUMPRODUCT((Status_range&lt;&gt;&#34;Paid&#34;) * (TODAY()&gt;DueDate_range) * Amount_range)
+</code></pre><p><code>SUMPRODUCT</code> handles this better than a second <code>SUMIF</code> because the
+condition spans two ranges at once, status and date. <code>SUMIFS</code> could do it
+too, but <code>SUMPRODUCT</code> reads more directly once a boolean condition and a
+date comparison sit in the same expression.</p><h2 id=tab-2-expense-log>Tab 2: Expense log</h2><p>Columns: <code>Date</code>, <code>Vendor</code>, <code>Category</code>, <code>Amount</code>, <code>Quarter</code> (computed, not
+typed).</p><p>Quarter as a formula:</p><pre tabindex=0><code>=ROUNDUP(MONTH(Date)/3, 0)
+</code></pre><p>Any date turns into 1, 2, 3, or 4. Combined with <code>YEAR(Date)</code>, that&rsquo;s a
+clean grouping key for a pivot table, and it&rsquo;s never manually wrong.</p><h2 id=rolling-expenses-up-by-category-and-quarter>Rolling expenses up by category and quarter</h2><p>Build a pivot table with <code>Category</code> as rows, <code>Quarter</code> as columns, <code>Amount</code>
+summed as values. Because Quarter is a formula column, the pivot stays
+accurate all year. There&rsquo;s no year-end reclassification step to remember.</p><h2 id=linking-the-two-tabs>Linking the two tabs</h2><p>On a <code>Summary</code> tab:</p><pre tabindex=0><code>=SUMIF(&#39;Invoice Log&#39;!Status, &#34;Paid&#34;, &#39;Invoice Log&#39;!Amount) - SUM(&#39;Expense Log&#39;!Amount)
+</code></pre><p>Paid income minus total expenses. This uses <em>paid</em> invoices, not sent
+ones. An unpaid invoice isn&rsquo;t income yet, no matter what&rsquo;s been billed.</p><h2 id=why-two-tabs-not-one>Why two tabs, not one</h2><p>A single mixed log of income and expenses works for very light use. But
+the overdue logic only applies to invoices, and the quarter rollup is
+mostly useful for expenses. Splitting them keeps each tab&rsquo;s formulas
+specific to what it tracks, instead of half the columns sitting unused on
+every row.</p></div></article></main><footer class=site-footer><div class=wrap><p>&copy; 2026 Ledger Sheets. Some links on this site may be affiliate links — if you buy through them we may earn a small commission at no extra cost to you.</p><p class=fine-print>Templates and formula breakdowns, not financial advice.</p></div></footer></body></html>

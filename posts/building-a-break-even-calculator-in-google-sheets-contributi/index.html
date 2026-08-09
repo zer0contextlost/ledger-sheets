@@ -1,0 +1,38 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Building a Break-Even Calculator in Google Sheets: Contribution Margin and a What-If Table · Ledger Sheets</title><meta name=description content="How to build a break-even calculator in Google Sheets using contribution margin formulas, plus an ARRAYFORMULA sensitivity table for price and cost changes."><link rel=stylesheet href=/ledger-sheets/css/style.css><link rel=alternate type=application/rss+xml href=/ledger-sheets/index.xml title="Ledger Sheets"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3797749320386385" crossorigin=anonymous></script></head><body><header class=site-header><div class=wrap><div class=brand-group><a class=brand href=/><span class=brand-mark>fx</span>Ledger Sheets</a>
+<span class=tagline>Formulas and templates, not advice.</span></div><nav class=nav><a href=/about/>About</a></nav></div></header><main class=wrap><article class=post><h1>Building a Break-Even Calculator in Google Sheets: Contribution Margin and a What-If Table</h1><p class=meta><span class=date>August 7, 2026</span>
+<span class=tag>break-even analysis</span><span class=tag>google sheets</span><span class=tag>formulas</span></p><div class=content><p>Break-even analysis answers one question: how many units before revenue
+covers fixed costs. Building it in a spreadsheet instead of running the
+math once means you can change any input, price, cost per unit, fixed
+overhead, and see the break-even point move immediately. Nothing here is
+pricing or business strategy advice. Just the calculator and how to read
+it.</p><h2 id=setting-up-the-inputs>Setting up the inputs</h2><p>Four inputs, each in its own cell so every formula below references them
+instead of hardcoding numbers:</p><table><thead><tr><th>Cell</th><th>Label</th><th>Example value</th></tr></thead><tbody><tr><td>B2</td><td>Price per unit</td><td>25</td></tr><tr><td>B3</td><td>Variable cost per unit</td><td>10</td></tr><tr><td>B4</td><td>Fixed costs (monthly)</td><td>3000</td></tr><tr><td>B5</td><td>Current unit sales</td><td>250</td></tr></tbody></table><p>Variable cost per unit is everything that scales with each sale:
+materials, per-transaction fees, shipping. Fixed costs don&rsquo;t change with
+volume in the period you&rsquo;re measuring: rent, software subscriptions,
+salaried labor.</p><h2 id=the-core-formulas>The core formulas</h2><p>Contribution margin per unit, what&rsquo;s left after variable costs to put
+toward fixed costs:</p><pre tabindex=0><code>=B2-B3
+</code></pre><p>Contribution margin ratio, the same thing as a percentage of price:</p><pre tabindex=0><code>=(B2-B3)/B2
+</code></pre><p>Break-even in units, fixed costs divided by contribution margin per unit:</p><pre tabindex=0><code>=B4/(B2-B3)
+</code></pre><p>With the example numbers, <code>3000/(25-10)</code> is 200 units. Below 200, fixed
+costs aren&rsquo;t fully covered. Above it, each unit&rsquo;s contribution margin is
+surplus.</p><p>Break-even in revenue, for when you sell multiple products at different
+prices and &ldquo;units&rdquo; isn&rsquo;t one clean number:</p><pre tabindex=0><code>=B4/((B2-B3)/B2)
+</code></pre><p>This is the dollar amount of sales required, independent of unit count.</p><p>Margin of safety, how far current sales sit above or below break-even:</p><pre tabindex=0><code>=(B5-B4/(B2-B3))/B5
+</code></pre><p>At B5 = 250 and break-even at 200, that returns 20%. Sales could drop 20%
+before hitting break-even.</p><h2 id=a-what-if-table-for-price-changes>A what-if table for price changes</h2><p>One break-even number only holds until someone asks what happens at $22
+instead of $25. Rather than editing B2 repeatedly, put candidate prices in
+D2:D8 (20, 22, 24, 25, 26, 28, 30), then in E2:</p><pre tabindex=0><code>=ARRAYFORMULA(B4/(D2:D8-B3))
+</code></pre><p>This spills break-even units for every price in that column against the
+same fixed and variable cost inputs. A small price cut near a thin margin
+moves break-even a lot more than the same cut against a wide margin, and
+scanning the column shows that directly.</p><p>Do the same for variable cost instead of price to see how a shipping rate
+increase moves the break-even point.</p><h2 id=two-variable-sensitivity-with-sequence>Two-variable sensitivity with SEQUENCE</h2><p>For break-even units across a full grid of price and fixed-cost
+combinations rather than one variable at a time:</p><pre tabindex=0><code>=ARRAYFORMULA(SEQUENCE(1,6,2000,500)/(20-B3))
+</code></pre><p><code>SEQUENCE(1,6,2000,500)</code> generates six fixed-cost values starting at 2000
+in steps of 500. Dividing by a fixed contribution margin (<code>20-B3</code>) returns
+break-even units for each. Nest the row and column ranges together for a
+full grid instead of a single strip.</p><h2 id=putting-it-together>Putting it together</h2><p>Three sections: the four raw inputs, the four formulas that reference
+them, one what-if table. Shade the input cells so it&rsquo;s obvious which are
+meant to be edited and which are calculated. That&rsquo;s what makes it a
+calculator someone reuses next month with new numbers instead of a
+one-time calculation rebuilt from scratch.</p></div></article></main><footer class=site-footer><div class=wrap><p>&copy; 2026 Ledger Sheets. Some links on this site may be affiliate links — if you buy through them we may earn a small commission at no extra cost to you.</p><p class=fine-print>Templates and formula breakdowns, not financial advice.</p></div></footer></body></html>

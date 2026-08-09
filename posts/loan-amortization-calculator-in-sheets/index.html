@@ -1,0 +1,37 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Building a Loan Amortization Schedule in Google Sheets · Ledger Sheets</title><meta name=description content="How to build a full month-by-month amortization schedule in Sheets using PMT, IPMT, and PPMT, plus a running balance that hits exactly zero at term end."><link rel=stylesheet href=/ledger-sheets/css/style.css><link rel=alternate type=application/rss+xml href=/ledger-sheets/index.xml title="Ledger Sheets"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3797749320386385" crossorigin=anonymous></script></head><body><header class=site-header><div class=wrap><div class=brand-group><a class=brand href=/><span class=brand-mark>fx</span>Ledger Sheets</a>
+<span class=tagline>Formulas and templates, not advice.</span></div><nav class=nav><a href=/about/>About</a></nav></div></header><main class=wrap><article class=post><h1>Building a Loan Amortization Schedule in Google Sheets</h1><p class=meta><span class=date>August 7, 2026</span>
+<span class=tag>loans</span><span class=tag>google-sheets</span><span class=tag>templates</span></p><div class=content><p>An amortization schedule shows, for every payment period, how much of a
+fixed payment goes to interest versus principal, and what the balance is
+afterward. Sheets has three built-in functions for this. Whether a
+particular rate or term is a good deal depends on numbers specific to an
+actual offer, which this post doesn&rsquo;t touch.</p><h2 id=the-three-functions>The three functions</h2><p>Given a loan amount (<code>principal</code>), an annual rate (<code>rate</code>), and a term in
+months (<code>term</code>):</p><pre tabindex=0><code>=PMT(rate/12, term, -principal)
+</code></pre><p><code>PMT</code> returns the fixed monthly payment. <code>rate/12</code> converts the annual rate
+to a monthly one. <code>principal</code> is negated because Sheets treats it as an
+outflow from the lender&rsquo;s side by convention; leave it positive and the
+payment comes back negative.</p><pre tabindex=0><code>=IPMT(rate/12, period, term, -principal)
+=PPMT(rate/12, period, term, -principal)
+</code></pre><p><code>IPMT</code> and <code>PPMT</code> split that same payment into interest and principal for
+a specific <code>period</code>, say month 7 of 360. Add them together for any given
+period and you get the <code>PMT</code> result back. That&rsquo;s a useful check once the
+sheet is built.</p><h2 id=building-the-schedule>Building the schedule</h2><p>Columns: <code>Period</code>, <code>Payment</code>, <code>Interest</code>, <code>Principal</code>, <code>Balance</code>.</p><p>Row for period 1:</p><pre tabindex=0><code>Payment:   =PMT($B$1/12, $B$2, -$B$3)
+Interest:  =IPMT($B$1/12, A2, $B$2, -$B$3)
+Principal: =PPMT($B$1/12, A2, $B$2, -$B$3)
+Balance:   =$B$3 - SUM($D$2:D2)
+</code></pre><p><code>$B$1</code> is annual rate, <code>$B$2</code> is term in months, <code>$B$3</code> is principal, <code>A2</code>
+is the period number. The dollar signs lock the loan constants while
+leaving the period reference relative, so dragging the formula down 359
+more rows recalculates each period without retyping anything.</p><p><code>Balance</code> sums all principal paid so far and subtracts it from the
+original loan, rather than chaining off the previous row&rsquo;s balance. That
+matters if you ever insert or reorder rows: a chained reference breaks,
+this doesn&rsquo;t.</p><h2 id=verifying-it>Verifying it</h2><p>The last row&rsquo;s Balance should land on exactly 0, give or take
+floating-point rounding in the twelfth decimal place. If it doesn&rsquo;t, check
+that rate and term are both monthly or both annual, not mixed, and that
+principal is negated consistently across all three functions.</p><h2 id=extra-payments>Extra payments</h2><p>Add an <code>ExtraPayment</code> column and change Balance to:</p><pre tabindex=0><code>=$B$3 - SUM($D$2:D2) - SUM($F$2:F2)
+</code></pre><p>where <code>F</code> is the extra-payment column. This shortens the payoff period but
+doesn&rsquo;t recompute the fixed payment amount. Modeling a recast, where the
+payment itself drops after a lump sum, means running <code>PMT</code> again with the
+new remaining balance and remaining term as inputs to a second schedule
+starting from that point.</p><h2 id=reusing-it>Reusing it</h2><p>Once the five columns and four formulas are in place, this is a template.
+Change the rate, term, or principal in the three input cells and the whole
+schedule below recalculates.</p></div></article></main><footer class=site-footer><div class=wrap><p>&copy; 2026 Ledger Sheets. Some links on this site may be affiliate links — if you buy through them we may earn a small commission at no extra cost to you.</p><p class=fine-print>Templates and formula breakdowns, not financial advice.</p></div></footer></body></html>

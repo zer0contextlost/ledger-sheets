@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Formulas on Ledger Sheets</title><link>https://zer0contextlost.github.io/ledger-sheets/tags/formulas/</link><description>Recent content in Formulas on Ledger Sheets</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://zer0contextlost.github.io/ledger-sheets/tags/formulas/index.xml" rel="self" type="application/rss+xml"/><item><title>Building a Break-Even Calculator in Google Sheets: Contribution Margin and a What-If Table</title><link>https://zer0contextlost.github.io/ledger-sheets/posts/building-a-break-even-calculator-in-google-sheets-contributi/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://zer0contextlost.github.io/ledger-sheets/posts/building-a-break-even-calculator-in-google-sheets-contributi/</guid><description>&lt;p&gt;Break-even analysis answers one question: how many units before revenue
+covers fixed costs. Building it in a spreadsheet instead of running the
+math once means you can change any input, price, cost per unit, fixed
+overhead, and see the break-even point move immediately. Nothing here is
+pricing or business strategy advice. Just the calculator and how to read
+it.&lt;/p&gt;
+&lt;h2 id="setting-up-the-inputs"&gt;Setting up the inputs&lt;/h2&gt;
+&lt;p&gt;Four inputs, each in its own cell so every formula below references them
+instead of hardcoding numbers:&lt;/p&gt;</description></item></channel></rss>

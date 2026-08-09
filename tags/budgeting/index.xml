@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Budgeting on Ledger Sheets</title><link>https://zer0contextlost.github.io/ledger-sheets/tags/budgeting/</link><description>Recent content in Budgeting on Ledger Sheets</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://zer0contextlost.github.io/ledger-sheets/tags/budgeting/index.xml" rel="self" type="application/rss+xml"/><item><title>A 50/30/20 Budget Tracker in Google Sheets, Formula by Formula</title><link>https://zer0contextlost.github.io/ledger-sheets/posts/50-30-20-budget-tracker-formulas/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://zer0contextlost.github.io/ledger-sheets/posts/50-30-20-budget-tracker-formulas/</guid><description>&lt;p&gt;The 50/30/20 rule splits take-home income into needs, wants, and
+savings/debt, roughly in a 50%, 30%, 20% ratio. Whether that split fits
+your situation is a separate question. What it gives a spreadsheet is three
+categories to tag transactions against and measure against a target, and
+that&amp;rsquo;s what this post builds.&lt;/p&gt;
+&lt;h2 id="sheet-layout"&gt;Sheet layout&lt;/h2&gt;
+&lt;p&gt;Two tabs: &lt;code&gt;Transactions&lt;/code&gt; for raw entries, &lt;code&gt;Summary&lt;/code&gt; for the rollup. Add a
+transaction and nothing else needs to change, because the formulas live on
+a different tab.&lt;/p&gt;</description></item></channel></rss>

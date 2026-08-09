@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Loans on Ledger Sheets</title><link>https://zer0contextlost.github.io/ledger-sheets/tags/loans/</link><description>Recent content in Loans on Ledger Sheets</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://zer0contextlost.github.io/ledger-sheets/tags/loans/index.xml" rel="self" type="application/rss+xml"/><item><title>Building a Loan Amortization Schedule in Google Sheets</title><link>https://zer0contextlost.github.io/ledger-sheets/posts/loan-amortization-calculator-in-sheets/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://zer0contextlost.github.io/ledger-sheets/posts/loan-amortization-calculator-in-sheets/</guid><description>&lt;p&gt;An amortization schedule shows, for every payment period, how much of a
+fixed payment goes to interest versus principal, and what the balance is
+afterward. Sheets has three built-in functions for this. Whether a
+particular rate or term is a good deal depends on numbers specific to an
+actual offer, which this post doesn&amp;rsquo;t touch.&lt;/p&gt;
+&lt;h2 id="the-three-functions"&gt;The three functions&lt;/h2&gt;
+&lt;p&gt;Given a loan amount (&lt;code&gt;principal&lt;/code&gt;), an annual rate (&lt;code&gt;rate&lt;/code&gt;), and a term in
+months (&lt;code&gt;term&lt;/code&gt;):&lt;/p&gt;</description></item></channel></rss>
